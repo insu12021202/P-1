@@ -1,0 +1,144 @@
+:root {
+    /* Color */
+    --main-color: #7DAAB8;
+    --white-color: #FFFFFF;
+    --grey-color: #434A4D;
+    --line-color: #CEDFE4;
+
+    /* Size */
+    --padding: 20px;   
+    --small-padding: 15px;
+}
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+ul, li {
+    list-style: none;
+}
+
+button {
+    border: 0;
+    cursor: pointer;
+    outline: none;
+    background: transparent;
+}
+
+body {
+    font-family: Roboto;
+}
+
+.header {
+    display: flex;
+    justify-content: space-around;
+    padding: var(--padding);
+    background-color: var(--main-color);
+    align-items: center;
+}
+
+#nav_icon {
+    color: var(--white-color);
+}
+
+.title {
+    color: var(--white-color);
+    font-size: 50px;
+}
+
+.log_in_btn {
+    color: var(--white-color);
+    font-size: 20px;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+.content {
+    border: 2px solid var(--main-color);
+    border-radius: 30px;
+    margin-top: 61px;
+    width: 1066px;
+    height: 721px;
+    display: flex;
+    flex-direction: column;
+}
+
+.content_header {
+    padding: var(--padding);
+    display: flex;
+    border-bottom: 2px solid var(--main-color);
+    font-size: 33px;
+}
+
+.post_name {
+    margin: auto;
+    color: var(--grey-color);
+}
+
+.content_list_box {
+    padding: 40px 20px 20px 20px;
+    height: 80%;
+    border-bottom: 2px solid var(--main-color);
+}
+
+.content_list {
+    color: var(--grey-color);
+    padding: var(--small-padding);
+    display: flex;
+    justify-content: space-between;
+    font-size: 25px;
+    border-bottom: 2px solid var(--main-color);;
+}
+
+.content_footer {
+    display: flex;
+    justify-content: center;
+    padding: var(--padding);
+}
+
+.post_btn {
+    font-size: 25px;
+    color: var(--grey-color);
+}
+
+.footer {
+    display: flex;
+    justify-content: center;
+    padding: var(--padding);
+}
+
+.circle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    border: 2px solid var(--main-color);
+    border-radius: 50%;
+    padding: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.page_num {
+    font-size: 22px;
+    color: var(--grey-color);
+}
+
+.pre_page_btn {
+    color: var(--main-color);
+}
+
+.next_page_btn {
+    color: var(--main-color);
+}
+
+
+
+
+
+
