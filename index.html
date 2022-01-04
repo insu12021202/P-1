@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,61 +11,108 @@
 <body>
     <!-- HEADER -->
     <div class="header">
-        <button class="nav_btn">
-            <i id = "nav_icon" class="fas fa-bars fa-2x"></i>
-        </button>
-        <h1 class="title">AJOU MEMO</h1>
-        <button class="log_in_btn">
-            로그인
-        </button>
+        <div class="logo_login_box">
+            <div class="header_logo">
+                <span class="logo">아주 메모</span>
+            </div>
+            <div class="header_login">
+                <button class="login_btn">로그인</button>
+            </div>
+        </div>
+        <div class="header_notice_board">
+            <button class="fn" id="fn">자유게시판</button>
+            <button class="fn" id="sn">비밀게시판</button>
+            <button class="fn" id="infon">정보게시판</button>
+            <button class="fn" id="pn">홍보게시판</button>
+            <button class="fn" id="swn">SW게시판</button>
+        </div>
     </div>
     <!-- CONTAINER -->
     <div class="container">
-        <div class="content">
-            <div class="content_header">
-                <span class="post_name">자유게시판</span>
-            </div>
-            <div class="content_list_box">
-                <ul class="content_list_ul">
-                    <li class="content_list">
-                        <span class="content_list_date">01/03</span>
-                        <span class="content_list_title">아주 비기너 과정 꼭 수료하자!</span>
-                        <span class="content_list_name">익명</span>
-                    </li>
-                    <li class="content_list">
-                        <span class="content_list_date">01/03</span>
-                        <span class="content_list_title">아주 비기너 과정 꼭 수료하자!</span>
-                        <span class="content_list_name">익명</span>
-                    </li>
-                    <li class="content_list">
-                        <span class="content_list_date">01/03</span>
-                        <span class="content_list_title">아주 비기너 과정 꼭 수료하자!</span>
-                        <span class="content_list_name">익명</span>
-                    </li>
-                    <li class="content_list">
-                        <span class="content_list_date">01/03</span>
-                        <span class="content_list_title">아주 비기너 과정 꼭 수료하자!</span>
-                        <span class="content_list_name">익명</span>
-                    </li>
-                    <li class="content_list">
-                        <span class="content_list_date">01/03</span>
-                        <span class="content_list_title">아주 비기너 과정 꼭 수료하자!</span>
-                        <span class="content_list_name">익명</span>
-                    </li>
-                </ul>
-            </div>
-            <div class="content_footer">
-                <button class="post_btn">등록하기</button>
-            </div>
+        <div class="content_name">
+            <span class="notice_name"><b>자유게시판</b></span>
+        </div>
+        <table class="content">
+            <th>No</th>
+            <th>제목</th>
+            <th>글쓴이</th>
+            <th>작성시간</th>
+            <th>좋아요</th>
+            <tr>
+                <td class="list_no">10</td>
+                <td class="list_title">아주 비기너 과정 화이팅</td>
+                <td class="list_author">여인수</td>
+                <td class="list_ptime">2022-01-04</td>
+                <td class="list_like">4</td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>아주 비기너 과정 화이팅</td>
+                <td>여인수</td>
+                <td>2022-01-04</td>
+                <td>4</td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>아주 비기너 과정 화이팅</td>
+                <td>여인수</td>
+                <td>2022-01-04</td>
+                <td>4</td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>아주 비기너 과정 화이팅</td>
+                <td>여인수</td>
+                <td>2022-01-04</td>
+                <td>4</td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>아주 비기너 과정 화이팅</td>
+                <td>여인수</td>
+                <td>2022-01-04</td>
+                <td>4</td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>아주 비기너 과정 화이팅</td>
+                <td>여인수</td>
+                <td>2022-01-04</td>
+                <td>4</td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>아주 비기너 과정 화이팅</td>
+                <td>여인수</td>
+                <td>2022-01-04</td>
+                <td>4</td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>아주 비기너 과정 화이팅</td>
+                <td>여인수</td>
+                <td>2022-01-04</td>
+                <td>4</td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>아주 비기너 과정 화이팅</td>
+                <td>여인수</td>
+                <td>2022-01-04</td>
+                <td>4</td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>아주 비기너 과정 화이팅</td>
+                <td>여인수</td>
+                <td>2022-01-04</td>
+                <td>4</td>
+            </tr>
+        </table>
+        <div class="content_footer">
+            <button class="write_btn">글쓰기</button>
         </div>
     </div>
-    <!-- FOOTER -->
-    <div class="footer">
-        <button class="pre_page_btn"><i class="fas fa-chevron-left fa-2x"></i></button>
-        <div class="circle">
-            <span class="page_num">1</span>
-        </div>
-        <button class="next_page_btn"><i class="fas fa-chevron-right fa-2x"></i></button>
-    </div>
+    <script src="switch_menu.js"></script>
 </body>
 </html>
