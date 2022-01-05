@@ -1,0 +1,71 @@
+
+.write_page {
+    display: flex; 
+    background-color: #F2F4F7;
+    padding: var(--padding);
+    height: 80%;
+    width: 80%;
+    margin: auto;
+    margin-top: 40px;
+    flex-direction: column;
+}
+
+.wirte_page_header {
+    display: flex;
+    width: 100%;
+    height: 7%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.write_title{
+    width: 79%;
+    height: 100%;
+}
+
+.write_title input {
+    width: 100%;
+    height: 100%;
+    text-align: start;
+    padding: var(--padding);
+}
+
+.choose_board {
+    display: flex;
+    align-items: center;
+    width: 19%;
+    height: 100%;
+}
+
+.choose_board select {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+.write_content {
+    width: 100%;
+    height: 90%;
+    margin-top: var(--padding);
+}
+
+.write_content textarea {
+    width: 100%;
+    height: 100%;
+    padding: var(--padding);
+}
+
+.write_page_footer {
+    margin-top: var(--padding);
+    display: flex;
+    height: 5%;
+    justify-content: end;
+}
+
+.write_submit_btn {
+    display: flex;
+    background-color: var(--main-color);
+    padding: var(--small-padding);
+    align-items: center;
+    color: var(--white-color);
+}

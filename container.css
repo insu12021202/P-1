@@ -1,0 +1,122 @@
+@import url(style.css);
+
+.container {
+    box-sizing: border-box;
+    height: 650px;
+    margin: 5% 5% 0 5%;
+}
+
+.hidden {
+    display: none;
+}
+
+.free_b_container, .secret_b_container, .info_b_container, .prom_b_container, .sw_b_container{
+    height: 100%;
+}
+
+.content_name {
+    font-family: 'Noto Sans KR', sans-serif;
+    height: 10%;
+    display: flex;
+    justify-content: start;
+    padding: var(--padding);
+    font-size: var(--font-large);
+}
+
+b { 
+    padding: var(--small-padding);
+}
+
+.content {
+    width: 100%;
+    height: 80%;
+    font-family: 'Noto Sans KR', sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: fixed;
+    border-top: 1px solid var(--dark-grey-color);
+}
+
+th, td {
+    padding: var(--small-padding);
+}
+
+tbody {
+    width: 100%;
+}
+
+td {
+    text-align: center;
+    height: 10%;
+    border-top: 1px solid var(--light-grey-color);
+}
+
+th {
+    height: 10%;
+}
+
+th:nth-child(1) {
+    width: 5%;
+}
+th:nth-child(2) {
+    width: 50%;
+}
+th:nth-child(3) {
+    width: 15%;
+}
+th:nth-child(4) {
+    width: 15%;
+}
+th:nth-child(5) {
+    width: 15%;
+}
+
+td:nth-child(1) {
+    width: 5%;
+}
+td:nth-child(2) {
+    width: 50%;
+}
+td:nth-child(3) {
+    width: 15%;
+}
+td:nth-child(4) {
+    width: 15%;
+}
+td:nth-child(5) {
+    width: 15%;
+}
+
+.content_footer {
+    display: flex;
+    height: 10%;
+    justify-content: end;
+    align-items: center;
+}
+
+.page_ctr_btn {
+    margin-right: auto;
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+}
+
+.post_page_btn {
+    margin-left: 13px;
+}
+
+.page_num_btn {
+    font-size: 20px;
+}
+
+.pre_page_btn {
+    margin-right: 13px;
+}
+
+.write_btn {
+    width: 80px;
+    height: 70%;
+    padding: var(--small-padding);
+    background-color: var(--main-color);
+    color: var(--white-color);
+}

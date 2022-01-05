@@ -1,0 +1,40 @@
+
+.header {
+    height: 15%;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.logo {
+    font-family: 'Gugi', cursive;
+    font-size: var(--font-large);
+}
+
+.logo_login_box {
+    height: 55%;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header_notice_board {
+    border-top: 1px solid var(--light-grey-color);
+    border-bottom: 1px solid var(--light-grey-color);
+    display: flex;
+    height: 45%;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.fn {
+    display: flex;
+    width: 20%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.fn:hover {
+    background-color: #1A6DFF;
+    color: white;
+}
