@@ -5,6 +5,7 @@
 @import url(container.css);
 @import url(write_page.css);
 @import url(post_page.css);
+@import url(login_page.css);
 
 :root {
     /* Color */

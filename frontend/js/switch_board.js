@@ -1,6 +1,6 @@
 const fn = document.querySelectorAll('.fn');
 const container = document.querySelector('.container');
-let parser = new DOMParser();
+const login_btn = document.querySelector('.login_btn');
 
 //pushState로 저장해놨던 data를 기반으로 페이지 앞으로 가기, 뒤로 가기가 발생했을 때 fetchPage 함수 실행
 window.onpopstate = function(e) {
@@ -13,6 +13,7 @@ function pushUrl(name) {
     let state = {data : name};
     history.pushState(state, null, url);
 }
+
 
 //ajax를 이용해 게시판의 url로 접근하면 서버에서 데이터를 받아와 index.html의 container에 그리기
 function fetchPage(name) {
@@ -35,4 +36,6 @@ function switchboard(e){
 fn.forEach(element => 
     element.addEventListener('click', switchboard)
 );
+login_btn.addEventListener('click', switchboard);
+
 

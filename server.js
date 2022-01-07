@@ -14,7 +14,7 @@ app.listen(3000, function(){
 })
 
 //초기 페이지에 index.html 제공
-app.get('', (req,res) => {
+app.get('/', (req,res) => {
     res.sendFile(__dirname + '/index.html');
 })
 
@@ -37,4 +37,8 @@ app.get('/prom_board', (req,res) => {
 //SW게시판 url에 접근하면 SW게시판 ejs 파일 전송
 app.get('/SW_board', (req,res) => {
     res.render(__dirname + '/frontend/js/view/sw_board.ejs');
+})
+
+app.get('/login', (req,res) => {
+    res.render(__dirname + '/frontend/js/view/login.ejs');
 })
