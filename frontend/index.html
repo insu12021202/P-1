@@ -9,6 +9,26 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 </head>
 <body>
+    <!-- login popup -->
+    <div class="login_bg hidden">
+        <div class="login_window">
+            <div class="login_popup">
+                <div class="login_popup_header">
+                    <span class="login_popup_title">LOGIN</span>
+                    <button class="close_login_btn"></button>
+                </div>
+                <form method="post" id="login_popup_container" action="" >
+                    <div class= "login_popup_div">
+                        <input type="text" id="login_id" name="login_id" placeholder="아이디">
+                        <input type="password" id="password" name="password" placeholder="비밀번호">
+                    </div>
+                    <div class="login_btn_div">
+                        <button class="btn_to_login">로그인</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <!-- HEADER -->
     <div class="header">
         <div class="logo_login_box">
@@ -29,13 +49,14 @@
     </div>
     <!-- CONTAINER -->
     <div class="container">
-        
+        <div>
+            <img src="images\home.png" alt="" width="100%" height="100%">
+        </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="js/switch_board.js"></script>
-    <script src="js/write.js"></script>
-    <script src="js/show_post.js"></script>
-    <script src="js/popstate.js"></script>
+    <script src="js/switch_board.js" type="module"></script>
+    <script src="js/write.js" type="module"></script>
+    <script src="js/show_post.js" type="module"></script>
     <script src="js/show_login.js"></script>
 </body>
 </html>

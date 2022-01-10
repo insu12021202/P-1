@@ -1,3 +1,9 @@
+input {
+    border : none;
+    outline: none;
+    padding: var(--small-padding);
+}
+
 .login_bg {
 position: fixed;
   top: 0;
@@ -33,7 +39,7 @@ position: fixed;
     
     /* 임시 지정 */
     width: 30%;
-    height: 55%;
+    height: 50%;
     
     /* 초기에 약간 아래에 배치 */
     transform: translate(-50%, -40%);
@@ -62,3 +68,46 @@ position: fixed;
     font-size: 40px;
     content: "\00d7";
 }
+
+#login_popup_container {
+    height: 60%;
+}
+
+.login_popup_div {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: var(--small-padding);
+}
+
+#login_id {
+    margin-top: 15%;
+    height: 20%;
+    border-bottom: 1px solid var(--dark-grey-color);
+}
+
+#login_id::placeholder, #password::placeholder {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 15px;
+}
+
+#password {
+    margin-top: 10%;
+    height: 20%;
+    border-bottom: 1px solid var(--dark-grey-color);
+}
+
+.login_btn_div {
+    margin-top: 5%;
+    width: 100%;
+    height: 25%;
+    padding: var(--small-padding);
+}
+
+.btn_to_login {
+    width: 100%;
+    height: 100%;
+    background-color: var(--main-color);
+    color: var(--light-grey-color);
+}
+

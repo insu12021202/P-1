@@ -1,6 +1,7 @@
 @import url(style.css);
 
 .container {
+    display: flex;
     box-sizing: border-box;
     height: 650px;
     margin: 5% 5% 0 5%;
@@ -119,4 +120,10 @@ td:nth-child(5) {
     padding: var(--small-padding);
     background-color: var(--main-color);
     color: var(--white-color);
+}
+
+.home_bg {
+    background-image: url('/images/home.png');
+    width: 100%;
+    height: 100%;
 }

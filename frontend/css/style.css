@@ -53,3 +53,13 @@ body, html {
 .hidden {
     display: none;
 }
+
+.logo {
+    cursor: pointer;
+}
+
+.home_logo {
+    font-family: 'Gugi', cursive;
+    font-size: 80px;
+    align-items: center;
+}
