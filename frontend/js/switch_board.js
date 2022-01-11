@@ -1,4 +1,6 @@
 import renderPost from "./show_post.js";
+import goToHome from "./show_home.js";
+import showWrite from "./write.js";
 
 const fn = document.querySelectorAll('.fn');
 const container = document.querySelector('.container');
@@ -7,7 +9,7 @@ const logo = document.querySelector('.logo');
 const list_title = document.querySelector('.list_title');
 
 //해당 게시판의 이름에 따라 url을 설정하고 pushState로 data와 url 저장
-function pushUrl(name) {
+export default function pushUrl(name) {
     let url = location.origin + `/${name}`;
     let state = {data : name};
     history.pushState(state, null, url);
@@ -19,14 +21,14 @@ function createTr(table, board_name) {
         
         let td1 = document.createElement('td');
         let td2 = document.createElement('td');
-        td2.addEventListener('click', renderPost);
+        td2.addEventListener('click', showPost);
         let td3 = document.createElement('td');
         let td4 = document.createElement('td');
         let td5 = document.createElement('td');
 
         td1.className = 'list_no';
         td1.innerText = String(i);
-
+        
         td2.className = 'list_title';
         td2.innerText = `여기는 ${board_name}입니다`
 
@@ -113,11 +115,13 @@ function createContainerHead(className, idName, board_name) {
     page_ctr_btn.appendChild(page_num_btn);
     page_ctr_btn.appendChild(post_page_btn);
 
+    //글쓰기 버튼에 이벤트 리스너 추가해서 클릭되면 URL 추가하고 showWrite 호출
     let write_btn = document.createElement('button');
     write_btn.className = 'write_btn';
     write_btn.innerText = '글쓰기';
     write_btn.addEventListener('click', () => {
-        console.log('글쓰기 버튼 클릭됨');
+        pushUrl('post_page');
+        showWrite();
     })
 
     content_footer.appendChild(page_ctr_btn);
@@ -151,6 +155,9 @@ function renderBoard(board_id) {
         case 'sw_board': //SW게시판
             createContainerHead('sw_b_container', 'sw_board', 'SW게시판');
             break;
+        case 'post_page': //게시글 작성
+            showWrite();
+            break;
     }
 }
 
@@ -171,28 +178,46 @@ function switchboard(e){
     renderBoard(board_name);
 }
 
-//메인 페이지를 그려주는 함수
-function goToHome() {
-    pushUrl('');
+
+//게시글 보여주기
+function showPost(event) {
     if(container.childNodes[0]) {
         container.removeChild(container.childNodes[0]);
     }
-    const home_bg = document.createElement('div');
-    const home_img = document.createElement('img');
-    home_img.setAttribute("src", "../images/home.png");
-    home_img.setAttribute("width", '100%');
-    home_img.setAttribute("height", '100%');
-    home_bg.appendChild(home_img);
-    container.appendChild(home_bg);
-}
-
-function showPost(event) {
     //해당 게시물의 종류와 번호를 url에 추가
     let board_name = event.target.parentNode.parentNode.id;
     let post_num = event.target.parentNode.firstChild.innerText;
-    pushUrl(`${board_name}/post${post_num}`);
-    renderPost();
+    switch (board_name) {
+        case 'free_board':
+            pushUrl(`${board_name}/post${post_num}`);
+            renderPost('자유게시판');
+            break;
+        case 'secret_board':
+            pushUrl(`${board_name}/post${post_num}`);
+            renderPost('비밀게시판');
+            break;
+        case 'info_board':
+            pushUrl(`${board_name}/post${post_num}`);
+            renderPost('정보게시판');
+            break;
+        case 'prom_board':
+            pushUrl(`${board_name}/post${post_num}`);
+            renderPost('홍보게시판');
+            break;
+        case 'sw_board':
+            pushUrl(`${board_name}/post${post_num}`);
+            renderPost('SW게시판');
+            break;
+    }
 
+}
+
+//홈페이지 보여주기
+function show_home_page() {
+    if(container.childNodes[0]) {
+        container.removeChild(container.childNodes[0]);
+    }
+    goToHome();
 }
 
 //각 게시판 버튼에 이벤트 추가
@@ -200,6 +225,6 @@ fn.forEach(element =>
     element.addEventListener('click', switchboard)
 );
 //로고 버튼에 메인 페이지로 갈 수 있는 이벤트 추가
-logo.addEventListener('click', goToHome);
+logo.addEventListener('click', show_home_page);
 
 

@@ -1,7 +1,7 @@
 .post_page {
     font-family: 'Noto Sans KR', sans-serif;
     display: flex; 
-    background-color: #F2F4F7;
+    background-color: var(--light-grey-color);
     padding: var(--padding);
     height: 80%;
     width: 80%;
