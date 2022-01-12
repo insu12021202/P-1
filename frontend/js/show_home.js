@@ -3,6 +3,10 @@ const container = document.querySelector('.container');
 
 //메인 페이지를 그려주는 함수
 export default function goToHome() {
+    if(container.childNodes[0]) {
+        container.removeChild(container.childNodes[0]);
+    }
+    
     pushUrl('');
     const home_bg = document.createElement('div');
     const home_img = document.createElement('img');

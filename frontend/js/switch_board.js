@@ -1,12 +1,11 @@
 import renderPost from "./show_post.js";
 import goToHome from "./show_home.js";
-import showWrite from "./write.js";
+import showWrite from "./show_write.js";
+import createDom from "./create_dom.js";
 
 const fn = document.querySelectorAll('.fn');
 const container = document.querySelector('.container');
-const body = document.body;
 const logo = document.querySelector('.logo');
-const list_title = document.querySelector('.list_title');
 
 //해당 게시판의 이름에 따라 url을 설정하고 pushState로 data와 url 저장
 export default function pushUrl(name) {
@@ -18,109 +17,76 @@ export default function pushUrl(name) {
 function createTr(table, board_name) {
     for (let i = 1; i < 11; i++) {
         let tr = document.createElement('tr');
-        
-        let td1 = document.createElement('td');
-        let td2 = document.createElement('td');
+
+        let td1 = createDom('td', 'list_no', String(i));
+        let td2 = createDom('td', 'list_title', `여기는 ${board_name}입니다`)
         td2.addEventListener('click', showPost);
-        let td3 = document.createElement('td');
-        let td4 = document.createElement('td');
-        let td5 = document.createElement('td');
+        let td3 = createDom('td', 'list_author', '여인수');
+        let td4 = createDom('td', 'list_ptime', '2022-01-04');
+        let td5 = createDom('td', 'list_like', '4');
 
-        td1.className = 'list_no';
-        td1.innerText = String(i);
-        
-        td2.className = 'list_title';
-        td2.innerText = `여기는 ${board_name}입니다`
-
-        td3.className = 'list_author';
-        td3.innerText = '여인수';
-
-        td4.className = 'list_ptime';
-        td4.innerText = '2022-01-04';
-
-        td5.className = 'list_like';
-        td5.innerText = '4';
-
-        tr.appendChild(td1);
-        tr.appendChild(td2);
-        tr.appendChild(td3);
-        tr.appendChild(td4);
-        tr.appendChild(td5);
-
+        let arr = [td1, td2, td3, td4, td5];
+        arr.forEach((element)=> {
+            tr.appendChild(element);
+        })
         table.appendChild(tr);
     }
 }
 
 function createContainerHead(className, idName, board_name) {
-    let board_container = document.createElement('div');
-    board_container.className = className;
-    let content_name = document.createElement('div');
-    content_name.className = 'content_name';
-    let notice_name = document.createElement('span');
-    notice_name.innerText = board_name;
-    notice_name.className = 'notice_name';
+    let board_container = createDom('div', className);
+    let content_name = createDom('div', 'content_name');
+    let notice_name = createDom('span', 'notice_name', board_name);
+
     content_name.appendChild(notice_name);
     board_container.appendChild(content_name);
     container.appendChild(board_container);
 
     //table 요소 만들고 선언
-    let content = document.createElement('table');
-    content.className = 'content';
+    let content = createDom('table', 'content');
     content.id = idName;
     board_container.appendChild(content);
 
     //table의 th만들기
-    let th1 = document.createElement('th');
-    th1.innerText = 'No';
+    let th1 = createDom('th', null, 'No');
     content.appendChild(th1)
-    let th2 = document.createElement('th');
-    th2.innerText = '제목';
+    let th2 = createDom('th', null, '제목');
     content.appendChild(th2)
-    let th3 = document.createElement('th');
-    th3.innerText = '작성자';
+    let th3 = createDom('th', null, '작성자');
     content.appendChild(th3)
-    let th4 = document.createElement('th');
-    th4.innerText = '작성시간';
+    let th4 = createDom('th', null, '작성 시간');
     content.appendChild(th4)
-    let th5 = document.createElement('th');
-    th5.innerText = '좋아요';
+    let th5 = createDom('th', null, '좋아요');
     content.appendChild(th5)
 
     //table의 tr 만들기
     createTr(content, board_name);
 
     //content의 footer 만들기
-    let content_footer = document.createElement('div');
-    content_footer.className = 'content_footer';
+    let content_footer = createDom('div', 'content_footer');
 
-    let page_ctr_btn = document.createElement('div');
-    page_ctr_btn.className = 'page_ctr_btn';
+    let page_ctr_btn = createDom('div', 'page_ctr_btn');
 
-    let pre_page_btn = document.createElement('button');
-    pre_page_btn.className = "pre_page_btn";
+    let pre_page_btn = createDom('button', 'pre_page_btn', '＜');
     //나중에 이 버튼에 이벤트 리스너 추가해서 이전 페이지가 있으면 넘어갈 수 있게 설정해야 함
-    pre_page_btn.innerText = '＜';
 
-    let page_num_btn = document.createElement('button');
-    page_num_btn.className = "page_num_btn";
+    let page_num_btn = createDom('button', 'page_num_btn', '1')
     //나중에 이 번호가 몇 번째 페이지 번호인지 알 수 있게 설정해야 함
-    page_num_btn.innerText = '1';
 
-    let post_page_btn = document.createElement('button');
-    post_page_btn.className = "post_page_btn";
+    let post_page_btn = createDom('button', 'post_page_btn', '＞');
     //나중에 이 버튼에 이벤트 리스너 추가해서 이후 페이지가 있으면 넘어갈 수 있게 설정해야 함
-    post_page_btn.innerText = '＞';
 
     page_ctr_btn.appendChild(pre_page_btn);
     page_ctr_btn.appendChild(page_num_btn);
     page_ctr_btn.appendChild(post_page_btn);
 
     //글쓰기 버튼에 이벤트 리스너 추가해서 클릭되면 URL 추가하고 showWrite 호출
-    let write_btn = document.createElement('button');
-    write_btn.className = 'write_btn';
-    write_btn.innerText = '글쓰기';
+    let write_btn = createDom('button', 'write_btn', '글쓰기');
     write_btn.addEventListener('click', () => {
         pushUrl('post_page');
+        if(container.childNodes[0]) {  
+            container.removeChild(container.childNodes[0]);
+            }
         showWrite();
     })
 
