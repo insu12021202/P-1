@@ -14,16 +14,27 @@ export default function pushUrl(name) {
     history.pushState(state, null, url);
 }
 
-function createTr(table, board_name) {
-    for (let i = 1; i < 11; i++) {
+function createTr(table, board_name, response) {
+    for(let i = 1; i < response.length+1; i++) {
         let tr = document.createElement('tr');
 
         let td1 = createDom('td', 'list_no', String(i));
-        let td2 = createDom('td', 'list_title', `여기는 ${board_name}입니다`)
+        
+        let td2 = createDom('td', 'list_title', `${response[i-1].post_title}`)
         td2.addEventListener('click', showPost);
-        let td3 = createDom('td', 'list_author', '여인수');
-        let td4 = createDom('td', 'list_ptime', '2022-01-04');
-        let td5 = createDom('td', 'list_like', '4');
+        //만약 작성자 이름에 null이 있으면 '익명'으로 교체
+        let user_name = response[i-1].post_author;
+        if(response[i-1].post_author == null){
+            user_name = '익명';
+        }
+        let td3 = createDom('td', 'list_author', `${user_name}`);
+        let td4 = createDom('td', 'list_ptime', `${response[i-1].post_time.substring(0,10)}`);
+        //만약 좋아요 개수가 null이면 0으로 표시
+        let post_like = ''
+        if(response[i-1].post_like == null){
+            post_like = '0';
+        }
+        let td5 = createDom('td', 'list_like', `${post_like}`);
 
         let arr = [td1, td2, td3, td4, td5];
         arr.forEach((element)=> {
@@ -31,9 +42,10 @@ function createTr(table, board_name) {
         })
         table.appendChild(tr);
     }
+    console.log(response);
 }
 
-function createContainerHead(className, idName, board_name) {
+function createContainerHead(className, idName, board_name, response) {
     let board_container = createDom('div', className);
     let content_name = createDom('div', 'content_name');
     let notice_name = createDom('span', 'notice_name', board_name);
@@ -54,13 +66,13 @@ function createContainerHead(className, idName, board_name) {
     content.appendChild(th2)
     let th3 = createDom('th', null, '작성자');
     content.appendChild(th3)
-    let th4 = createDom('th', null, '작성 시간');
+    let th4 = createDom('th', null, '작성 날짜');
     content.appendChild(th4)
     let th5 = createDom('th', null, '좋아요');
     content.appendChild(th5)
 
     //table의 tr 만들기
-    createTr(content, board_name);
+    createTr(content, board_name, response);
 
     //content의 footer 만들기
     let content_footer = createDom('div', 'content_footer');
@@ -69,7 +81,7 @@ function createContainerHead(className, idName, board_name) {
 
     let pre_page_btn = createDom('button', 'pre_page_btn', '＜');
     //나중에 이 버튼에 이벤트 리스너 추가해서 이전 페이지가 있으면 넘어갈 수 있게 설정해야 함
-
+    
     let page_num_btn = createDom('button', 'page_num_btn', '1')
     //나중에 이 번호가 몇 번째 페이지 번호인지 알 수 있게 설정해야 함
 
@@ -96,7 +108,7 @@ function createContainerHead(className, idName, board_name) {
     board_container.appendChild(content_footer);
 }
 
-function renderBoard(board_id) {
+function renderBoard(board_id, response) {
     //container에 내용물이 있으면 내용물을 먼저 지우기
     if(container.childNodes[0]) {  
     container.removeChild(container.childNodes[0]);
@@ -107,19 +119,19 @@ function renderBoard(board_id) {
             goToHome();
             break;
         case 'free_board': //자유게시판
-            createContainerHead('free_b_container', 'free_board', '자유게시판');
+            createContainerHead('free_b_container', 'free_board', '자유게시판', response);
             break;
         case 'secret_board': //비밀게시판
-            createContainerHead('secret_b_container', 'secret_board', '비밀게시판');
+            createContainerHead('secret_b_container', 'secret_board', '비밀게시판', response);
             break;
         case 'info_board': //정보게시판
-            createContainerHead('info_b_container', 'info_board', '정보게시판');
+            createContainerHead('info_b_container', 'info_board', '정보게시판', response);
             break;
         case 'prom_board': //홍보게시판
-            createContainerHead('prom_b_container', 'prom_board', '홍보게시판');
+            createContainerHead('prom_b_container', 'prom_board', '홍보게시판', response);
             break;
         case 'sw_board': //SW게시판
-            createContainerHead('sw_b_container', 'sw_board', 'SW게시판');
+            createContainerHead('sw_b_container', 'sw_board', 'SW게시판', response);
             break;
         case 'post_page': //게시글 작성
             showWrite();
@@ -140,8 +152,18 @@ function switchboard(e){
         container.removeChild(container.childNodes[0]);
     }
     let board_name = e.target.id;
-    pushUrl(board_name);
-    renderBoard(board_name);
+    //해당 게시판의 게시글들을 데이터베이스에서 받아오기
+    $.ajax({
+        type :'GET',
+        url : `/${board_name}`,
+        dataType: 'json',
+        success: function(response){
+            pushUrl(board_name);
+            renderBoard(board_name, response);
+        }
+    })
+
+    
 }
 
 

@@ -1,0 +1,80 @@
+.container {
+    justify-content: center;
+}
+
+.register {
+    font-family: 'Noto Sans KR', sans-serif;
+    width: 50%;
+    height: 100%;
+    background-color: var(--dark-grey-color);
+}
+
+.register_header {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 30%;
+    justify-content: center;
+    align-items: center;
+}
+
+.register_title {
+    font-size: 45px;
+    font-weight: bold;
+    color:whitesmoke;
+}
+
+.register_help {
+    font-size: 20px;
+    margin-top: 2%;
+    color: whitesmoke;
+}
+
+.register_container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 50%;
+    justify-content: center;
+    align-items: center;
+}
+
+.register_name, .register_id {
+    width: 60%;
+    height: 18%;
+    background-color: transparent;
+    border-bottom: 2px solid whitesmoke;
+}
+
+.register_name {
+    margin-bottom: 3%;
+}
+
+.register_id {
+    margin-top: 3%;
+    margin-bottom: 5%;
+}
+
+.register_name::placeholder, .register_id::placeholder {
+    font-family: 'Noto Sans KR', sans-serif;
+    color: whitesmoke;
+    font-size: 20px;
+}
+
+.register_footer {
+    width: 100%;
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.register_btn {
+    font-family: 'Noto Sans KR', sans-serif;
+    color: whitesmoke;
+    font-size: 20px;
+    width: 30%;
+    padding: 10px;
+    border: 2px solid whitesmoke;
+    border-radius: 10px;
+}

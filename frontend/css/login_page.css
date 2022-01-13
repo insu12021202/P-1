@@ -111,3 +111,7 @@ position: fixed;
     color: var(--light-grey-color);
 }
 
+.btn_to_register {
+    margin-top: 16%;
+}
+
