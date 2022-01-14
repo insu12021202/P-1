@@ -15,23 +15,28 @@ export default function pushUrl(name) {
 }
 
 function createTr(table, board_name, response) {
-    for(let i = 1; i < response.length+1; i++) {
+    for(let i = 0; i < response.length; i++) {
+        let post_num = response[i].id;
         let tr = document.createElement('tr');
 
-        let td1 = createDom('td', 'list_no', String(i));
-        
-        let td2 = createDom('td', 'list_title', `${response[i-1].post_title}`)
-        td2.addEventListener('click', showPost);
+        let td1 = createDom('td', 'list_no', String(i+1));
+        let td2 = createDom('td', 'list_title', `${response[i].post_title}`)
+
+        //게시글 제목이 클릭되면 showPost 실행
+        td2.addEventListener('click', function(){
+            showPost(board_name, post_num);
+        });
+
         //만약 작성자 이름에 null이 있으면 '익명'으로 교체
-        let user_name = response[i-1].post_author;
-        if(response[i-1].post_author == null){
+        let user_name = response[i].post_author;
+        if(response[i].post_author == null){
             user_name = '익명';
         }
         let td3 = createDom('td', 'list_author', `${user_name}`);
-        let td4 = createDom('td', 'list_ptime', `${response[i-1].post_time.substring(0,10)}`);
+        let td4 = createDom('td', 'list_ptime', `${response[i].post_time.substring(0,10)}`);
         //만약 좋아요 개수가 null이면 0으로 표시
         let post_like = ''
-        if(response[i-1].post_like == null){
+        if(response[i].post_like == null){
             post_like = '0';
         }
         let td5 = createDom('td', 'list_like', `${post_like}`);
@@ -42,7 +47,6 @@ function createTr(table, board_name, response) {
         })
         table.appendChild(tr);
     }
-    console.log(response);
 }
 
 function createContainerHead(className, idName, board_name, response) {
@@ -109,38 +113,59 @@ function createContainerHead(className, idName, board_name, response) {
 }
 
 function renderBoard(board_id, response) {
-    //container에 내용물이 있으면 내용물을 먼저 지우기
-    if(container.childNodes[0]) {  
-    container.removeChild(container.childNodes[0]);
-    }
-
-    switch (board_id) {
-        case '': //메인 페이지
-            goToHome();
-            break;
-        case 'free_board': //자유게시판
-            createContainerHead('free_b_container', 'free_board', '자유게시판', response);
-            break;
-        case 'secret_board': //비밀게시판
-            createContainerHead('secret_b_container', 'secret_board', '비밀게시판', response);
-            break;
-        case 'info_board': //정보게시판
-            createContainerHead('info_b_container', 'info_board', '정보게시판', response);
-            break;
-        case 'prom_board': //홍보게시판
-            createContainerHead('prom_b_container', 'prom_board', '홍보게시판', response);
-            break;
-        case 'sw_board': //SW게시판
-            createContainerHead('sw_b_container', 'sw_board', 'SW게시판', response);
-            break;
-        case 'post_page': //게시글 작성
-            showWrite();
-            break;
-    }
+    // /게시판 url로 오면 게시판 데이터 받아오기
+    $.ajax({
+        type :'GET',
+        url : `/${board_id}`,
+        data : {board_name : board_id},
+        dataType: 'json',
+        success: function(response){
+            //container에 내용물이 있으면 내용물을 먼저 지우기
+        if(container.childNodes[0]) {  
+            container.removeChild(container.childNodes[0]);
+            }
+    
+        switch (board_id) {
+            case '': //메인 페이지
+                goToHome();
+                break;
+            case 'free_board': //자유게시판
+                createContainerHead('free_b_container', 'free_board', '자유게시판', response);
+                break;
+            case 'secret_board': //비밀게시판
+                createContainerHead('secret_b_container', 'secret_board', '비밀게시판', response);
+                break;
+            case 'info_board': //정보게시판
+                createContainerHead('info_b_container', 'info_board', '정보게시판', response);
+                break;
+            case 'prom_board': //홍보게시판
+                createContainerHead('prom_b_container', 'prom_board', '홍보게시판', response);
+                break;
+            case 'sw_board': //SW게시판
+                createContainerHead('sw_b_container', 'sw_board', 'SW게시판', response);
+                break;
+            case 'post_page': //게시글 작성
+                showWrite();
+                break;
+        }   //만약 게시글 주소를 가지고 있으면 showPost에 post_num 전달해서 그리기
+            if(board_id.includes('free_board/post')){
+                showPost('자유게시판',board_id.substr(-1));
+            }if(board_id.includes('secret_board/post')){
+                showPost('비밀게시판',board_id.substr(-1));
+            }if(board_id.includes('info_board/post')){
+                showPost('정보게시판',board_id.substr(-1));
+            }if(board_id.includes('prom_board/post')){
+                showPost('홍보게시판',board_id.substr(-1));
+            }if(board_id.includes('sw_board/post')){
+                showPost('SW게시판',board_id.substr(-1));
+            }
+        }
+    })
+    
 }
 
-//pushState로 저장해놨던 data를 기반으로 페이지 앞으로 가기, 뒤로 가기가 발생했을 때 renderHtml 함수 실행
-window.onpopstate = function() {
+//pushState로 저장해놨던 data를 기반으로 페이지 앞으로 가기, 뒤로 가기가 발생했을 때 renderBoard 함수 실행
+window.onpopstate = function(e) {
     let location_path = location.pathname;
     renderBoard(location_path.substring(1,));
 }
@@ -153,50 +178,68 @@ function switchboard(e){
     }
     let board_name = e.target.id;
     //해당 게시판의 게시글들을 데이터베이스에서 받아오기
-    $.ajax({
-        type :'GET',
-        url : `/${board_name}`,
-        dataType: 'json',
-        success: function(response){
-            pushUrl(board_name);
-            renderBoard(board_name, response);
-        }
-    })
-
-    
+    pushUrl(board_name);
+    renderBoard(board_name);
 }
 
 
 //게시글 보여주기
-function showPost(event) {
+function showPost(board_name, post_num) {
     if(container.childNodes[0]) {
         container.removeChild(container.childNodes[0]);
     }
     //해당 게시물의 종류와 번호를 url에 추가
-    let board_name = event.target.parentNode.parentNode.id;
-    let post_num = event.target.parentNode.firstChild.innerText;
+    //서버에 요청해서 해당 게시글 데이터 받아오기
+    let board_name_en = '';
     switch (board_name) {
-        case 'free_board':
-            pushUrl(`${board_name}/post${post_num}`);
-            renderPost('자유게시판');
+        case '자유게시판':
+            board_name_en = 'free_board';
             break;
-        case 'secret_board':
-            pushUrl(`${board_name}/post${post_num}`);
-            renderPost('비밀게시판');
+        case '비밀게시판':
+            board_name_en = 'secret_board';
             break;
-        case 'info_board':
-            pushUrl(`${board_name}/post${post_num}`);
-            renderPost('정보게시판');
-            break;
-        case 'prom_board':
-            pushUrl(`${board_name}/post${post_num}`);
-            renderPost('홍보게시판');
-            break;
-        case 'sw_board':
-            pushUrl(`${board_name}/post${post_num}`);
-            renderPost('SW게시판');
-            break;
+        case '정보게시판':
+            board_name_en = 'info_board';
+        break;
+        case '홍보게시판':
+            board_name_en = 'prom_board';
+        break;
+        case 'SW게시판':
+            board_name_en = 'sw_board';
+        break;
     }
+    $.ajax({
+        type: "GET",
+        url:`/${board_name_en}/post${post_num}`,
+        dataType: 'json',
+        success: (response)=>{
+            //서버로부터 받아온 게시글 데이터를 renderPost에 넘겨주기
+            switch (board_name_en) {
+                case 'free_board':
+                    pushUrl(`${board_name_en}/post${post_num}`);
+                    renderPost('자유게시판', response);
+                    break;
+                case 'secret_board':
+                    pushUrl(`${board_name_en}/post${post_num}`);
+                    renderPost('비밀게시판', response);
+                    break;
+                case 'info_board':
+                    pushUrl(`${board_name_en}/post${post_num}`);
+                    renderPost('정보게시판', response);
+                    break;
+                case 'prom_board':
+                    pushUrl(`${board_name_en}/post${post_num}`);
+                    renderPost('홍보게시판', response);
+                    break;
+                case 'sw_board':
+                    pushUrl(`${board_name_en}/post${post_num}`);
+                    renderPost('SW게시판', response);
+                    break;
+            }
+        },
+        error: (log)=>{console.log(log)}
+    });
+    
 
 }
 
